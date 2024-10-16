@@ -26,5 +26,6 @@ RUN composer install --no-scripts --ignore-platform-req=ext-exif --ignore-platfo
 # Expose the port Laravel serves on
 EXPOSE 6001 8000 5173
 
-# Here you might want to run your application, uncomment and modify the following line:
-#CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Added commands to install dependencies, build the project, and start the development server
+CMD ["sh", "-c", "npm install && npm run build && npm run dev"]
+
