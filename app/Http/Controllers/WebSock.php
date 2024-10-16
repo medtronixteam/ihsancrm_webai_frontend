@@ -65,7 +65,7 @@ class WebSock extends Controller
     }
     public static function triggerPendingSMS($bot_token){
 
-        $pendingsms = DB::table('ai_sms')->select('id', 'body', 'to_person')->where('is_bot',1)->where('bot_id', $bot_token)->where('status', 'pending');
+        $pendingsms = DB::table('ai_sms')->select('id', 'body', 'to_person','bot_id')->where('is_bot',1)->where('bot_id', $bot_token)->where('status', 'pending');
         if ($pendingsms->count() > 0) {
             try {
 
