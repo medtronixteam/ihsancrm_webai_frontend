@@ -32,6 +32,7 @@ Route::post('sms/v2/receive-sms', [SMSAiHooks::class,'receiveSMS_two']);
 
 Route::post('sms/v1/pending-sms', [SMSAiHooks::class,'pendingSMS']);
 Route::post('sms/v1/change-status', [SMSAiHooks::class,'changeSMSStatus']);
+Route::get('sms/v1/delete-pending', [SMSAiHooks::class,'deletePending']);
 
 //sms receive hooks
 Route::post('sms/v1/send/pending-sms', [SMSAiHooks::class,'storePendings']);

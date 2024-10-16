@@ -32,7 +32,7 @@ class SMSAiHooks extends Controller
                 return response([
                     'message' => 'These credentials do not match our records.', 'status' => 404,
                 ], 404);
-            }   
+            }
 
             $token = $user->createToken('my-app-token')->plainTextToken;
             unset($user->id);
@@ -201,17 +201,25 @@ class SMSAiHooks extends Controller
 
             $pendingsms = DB::table('ai_sms')->where('id', $request->sms_id);
             if ($pendingsms->count()>0) {
-                Log::info("change status run ok:");
+
                 $pendingsms->update(['status' => 'success']);
-                $response = ['message' => "Status has been updated", 'status' => 200];
+                $response = ['message' => "Status has been updated",'data'=>$pendingsms->first(), 'status' => 200];
 
             } else {
-                Log::info("change status invalid key:");
+
                 $response = ['message' => "Invalid Id ", 'status' => 500];
             }
 
         }
         return response($response, $response['status']);
+    }
+    public function deletePending()
+    {
+        $pendingsms = DB::table('ai_sms')->where('status', 'pending')->delete();
+        $response = ['message' => "Pending sms deleted ", 'status' => 200];
+        return response($response, $response['status']);
+
+
     }
     public function storePendings(Request $request)
     {
